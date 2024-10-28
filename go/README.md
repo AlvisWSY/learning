@@ -46,7 +46,71 @@ func Add(x int, y int) int {
     return x + y
 }
 ```
+
 如果连续的几个变量类型一样，可以省略写成`(x, y int)` 
 
 If consecutive variables share the same type, it can be abbreviated as `(x, y int)`.
 
+另外，函数也可以返回多个值：
+
+Function can also return values:
+```go
+func swap(x, y string) (string, string) {
+    return y, x
+}
+```
+
+或者带名字的返回值：
+
+Or named-result:
+```go
+func split(sum int) (x, y int) {
+	x = sum * 4 / 9
+	y = sum - x
+	return
+}
+```
+
+### Variables
+
+变量使用`var`语句声明，变量类型在变量名后。变量可以在包/函数层级声明。
+
+Variables are declared using the `var` statement with the variable type after the variable name. Variables can be declared at package/function level.
+
+```go
+package main
+
+import "fmt"
+
+var c, python, java bool
+
+func main() {
+	var i int
+	fmt.Println(i, c, python, java)
+}
+```
+输出为：`0 false false false`  
+
+The output is: `0 false false false`
+
+变量也可以设置初始值，如果设置了初始值可以不用声明类型，会自动推断类型。  
+
+Variables can also be initialized with values, and if an initial value is set, the type can be omitted as it will be inferred.
+
+```go
+func main() {
+	var c, python, java = true, false, "no!"
+	fmt.Println(i, j, c, python, java)
+}
+```
+
+函数内也可以使用短变量声明，函数外每个语句都必须以关键字开始。
+_Short variable declarations_ can also be used inside a function. Outside a function, every statement must start with a keyword.
+
+```go
+func main() {
+	var c, python, java = true, false, "no!"
+    k := 1
+	fmt.Println(k, c, python, java)
+}
+```

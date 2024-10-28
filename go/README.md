@@ -32,7 +32,7 @@ import (
 
 ### Exported Names
 
-Go程序由包组成，包之间数据/函数的交互以及调用使用_导出名_。导出名是约定的写法：若方法/函数/变量的首字母大写，则是可以在其他包访问的；若小写则是包内部的。
+Go程序由包组成，包之间数据/函数的交互以及调用使用 _导出名_ 。导出名是约定的写法：若方法/函数/变量的首字母大写，则是可以在其他包访问的；若小写则是包内部的。
 
 Go programs consist of packages, and interaction or calls between them use _exported names_. An exported name follows a convention: if a method/function/variable starts with an uppercase letter, it is accessible from other packages. If it starts with a lowercase letter, it is internal to the package.
 

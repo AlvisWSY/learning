@@ -93,7 +93,7 @@ func main() {
 
 The output is: `0 false false false`
 
-变量也可以设置初始值，如果设置了初始值可以不用声明类型，会自动推断类型。  
+变量也可以设置初始值，如果设置了初始值可以不用声明类型，会自动推断类型。未设置初始值，默认为0值，（0，false，“”）
 
 Variables can also be initialized with values, and if an initial value is set, the type can be omitted as it will be inferred.
 
@@ -114,3 +114,14 @@ func main() {
 	fmt.Println(k, c, python, java)
 }
 ```
+
+### Basic Types
+
+go的基本类型有什么`bool string int unit float complex`之类的。`int`是有符号的整型，`uint`是无符号的，只能储存正数或者0。
+
+Basic types contains `bool string int unit float complex`. `int` can store integers with sign, `uint` with no sign.
+
+
+类型转换可以使用`T(v)`把`v`转换为`类型T`的值。
+
+Type conversions: `T(v)` convert value `v` to type `T`.

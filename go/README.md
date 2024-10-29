@@ -12,13 +12,15 @@ First, learn the basics of Go syntax and components using the online tool [Go To
 
 ## Basic Syntax
 
-### Package
+### Package Variable and Function
+
+#### Package
 
 Go程序由包构成。`main`包是特殊的包，表示这是一个可独立运行的程序，而不是库或者模块。在`main`包中必须有一个`main`函数，作为程序执行的**起点**，相当于其他语言的主函数。
 
 Go programs are constructed from packages. The `main` package is a special package indicating that this is a standalone executable program, not a library or module. The `main` package must contain a `main` function, which serves as the entry point for program execution, similar to the main function in other languages.
 
-### Imports (Libraries/Packages)
+#### Imports (Libraries/Packages)
 
 Go使用`import`关键字导入包，例如：`import "fmt"`。多个包可以以“分组”形式一起导入：
 
@@ -30,13 +32,13 @@ import (
 )
 ```
 
-### Exported Names
+#### Exported Names
 
 Go程序由包组成，包之间数据/函数的交互以及调用使用 _导出名_ 。导出名是约定的写法：若方法/函数/变量的首字母大写，则是可以在其他包访问的；若小写则是包内部的。
 
 Go programs consist of packages, and interaction or calls between them use _exported names_. An exported name follows a convention: if a method/function/variable starts with an uppercase letter, it is accessible from other packages. If it starts with a lowercase letter, it is internal to the package.
 
-### Functions
+#### Functions
 
 Go的函数定义有点像C，但是变量类型在变量名的后面。
 
@@ -65,13 +67,13 @@ func swap(x, y string) (string, string) {
 Or named-result:
 ```go
 func split(sum int) (x, y int) {
-	x = sum * 4 / 9
-	y = sum - x
-	return
+    x = sum * 4 / 9
+    y = sum - x
+    return
 }
 ```
 
-### Variables
+#### Variables
 
 变量使用`var`语句声明，变量类型在变量名后。变量可以在包/函数层级声明。
 
@@ -85,8 +87,8 @@ import "fmt"
 var c, python, java bool
 
 func main() {
-	var i int
-	fmt.Println(i, c, python, java)
+    var i int
+    fmt.Println(i, c, python, java)
 }
 ```
 输出为：`0 false false false`  
@@ -99,8 +101,8 @@ Variables can also be initialized with values, and if an initial value is set, t
 
 ```go
 func main() {
-	var c, python, java = true, false, "no!"
-	fmt.Println(i, j, c, python, java)
+    var c, python, java = true, false, "no!"
+    fmt.Println(i, j, c, python, java)
 }
 ```
 
@@ -109,13 +111,13 @@ _Short variable declarations_ can also be used inside a function. Outside a func
 
 ```go
 func main() {
-	var c, python, java = true, false, "no!"
+    var c, python, java = true, false, "no!"
     k := 1
-	fmt.Println(k, c, python, java)
+    fmt.Println(k, c, python, java)
 }
 ```
 
-### Basic Types
+#### Basic Types
 
 go的基本类型有什么`bool string int unit float complex`之类的。`int`是有符号的整型，`uint`是无符号的，只能储存正数或者0。
 
@@ -125,3 +127,53 @@ Basic types contains `bool string int unit float complex`. `int` can store integ
 类型转换可以使用`T(v)`把`v`转换为`类型T`的值。
 
 Type conversions: `T(v)` convert value `v` to type `T`.
+
+### Flow Control
+
+#### For Loop
+
+go只有for循环，且循环的条件表达式可以没有（）。但是循环体要{}
+
+go has only _for loop_.
+```go
+i := 0
+sum := 0
+for i < 5 { //这种写法就是C中的while
+    sum += i
+    i++
+}
+```
+也可以在for后面直接加上条件的初始化以及后置语句，用分号隔开，例如`for i := 0; i < 5; i++ {}`。这种写法变量`i`的作用域仅在循环内。
+如果没有条件语句，就是无限循环`for{}`
+
+#### If
+
+go的if语句也可以没有()，但是{}必须有。并且同样，如果在条件语句位置声明了变量，他也仅在`if`以及其相应的`else`块内作用。在范围外未定义。
+```go
+if x < 0 {
+}
+```
+
+#### Switch
+
+go的`switch`语句只会选择满足条件的`case`，不会自动执行后续的所有，就是说不用手动添加`break`。而且`case`无需为常量或者整数。
+`switch`可以无条件，例如：
+```go
+switch {
+    case t.Hour() < 12:
+        fmt.Println("早上好！")
+    case t.Hour() < 17:
+        fmt.Println("下午好！")
+    default:
+        fmt.Println("晚上好！")
+}
+```
+
+#### Defer
+
+典中典之defer。Garena笔试就挂在这里））
+
+`defer`会把函数推迟到外部函数返回之后再调用。但是函数内的计算会即刻进行。如果函数内有对变量的修改或者对指针的修改，那么也会在调用时才进行。
+并且`defer`是一个LIFO的栈。如果用了很多`defer`，那么他们就会后进先出地调用。
+
+（感觉可以用defer搞很多花活啊，，，）
